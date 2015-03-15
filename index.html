@@ -1,0 +1,165 @@
+<!DOCTYPE html-->
+<html>
+    <head>
+        <meta charset="UTF-8">
+            <link rel="stylesheet" href="css/jquery.mobile-1.4.5.min.css" />
+	    <script type="text/javascript" charset="utf-8" src="phonegap.js"></script>
+            <script src="js/jquery.min.js"></script>
+            <script src="js/jquery.mobile-1.4.5.min.js"></script>
+            <title>Alumnos</title>
+            
+            <style type="text/css">
+                p{
+                    text-align: center;
+                }
+            </style>
+            
+            <script type="text/javascript">
+            $(document).ready(function inicio(){
+                
+                var btnGuardar=$("#guardar");
+                var btnGuardarCal=$("#guardar_cal");
+                
+                btnGuardar.click(function enviarDatos(){
+                    
+                    var Mat=$("#Matricula").val();
+                    var Nom=$("#Nombre").val();
+                    var ApPat=$("#ApPat").val();
+                    var ApMat=$("#ApMat").val();
+                    var Car=$("#Carrera").val();
+                    var Sem=$("#Semestre").val();
+                    var Email=$("#Email").val();
+                    var Tel=$("#Telefono").val();
+                    
+      $.ajax({
+          type:"POST",
+          url:"https://aguilardaza_260mb.net/datos.php",
+          data:"Matricula="+Mat+"&Nombre="+Nom+"&Apellido_Paterno="+ApPat+"&Apellido_Materno="+ApMat+"&Carrera="+Car+"&Semestre="+Sem+"&Email="+Email+"&Telefono="+Tel,
+          success:recepcion
+      })
+     });
+                btnGuardarCal.click(function enviarDatos(){
+                    
+                    
+                    var Matri=$("#Matriculaa").val();
+                    var pa1=parseInt($("#Parcial1").val());
+                    var pa2=parseInt($("#Parcial2").val());
+                    var pa3=parseInt($("#Parcial3").val());
+                    var pa4=parseInt($("#Parcial4").val());
+                    var prome=((pa1+pa2+pa3+pa4)/4);
+                
+                $.ajax({
+          type:"POST",
+          url:"https://aguilardaza_260mb.net/calificaciones.php",
+          data:"Matricula="+Matri+"&Parcial1="+pa1+"&Parcial2="+pa2+"&Parcial3="+pa3+"&Parcial4="+pa4+"&Promedio="+prome,
+          success:recepcion1
+      })
+                    
+                    });
+     function recepcion(datos){
+         var resp=$("#respuesta");
+         resp.html(datos);
+     }
+     function recepcion1(datos){
+         var resp=$("#respuesta");
+         resp.html(datos);
+     }
+    });
+</script>
+</head>
+<body>
+    
+     <div data-role="page" id="Principal" data-theme="b">
+                <div data-role="header">
+                <p>MENU</p>
+                </div>
+                <div data-role="content">
+                <a href="#Datos_Alumnos" data-role="button" data-transition="slideup" id="menus1">Registro de alumnos</a>
+                <a href="#Datos_Calificaciones" data-role="button" data-transition="slideup" id="menus1">Registro de calificaciones</a>
+                </div>
+                <div data-roler="footer">
+                    <p>Derechos reservados</p>
+                </div>
+     </div>
+    
+    
+    
+    <div data-role="page" id="Datos_Alumnos" data-theme="b">
+                <div data-role="header">
+                    <p style="text-align: center;">Registro de alumnos</p>
+                </div>
+                <div data-role="content">
+                    
+                    <form method="POST" action="envio_datos.php">
+                        <div class="ui-field-contain">
+                
+                <label for="Matricula">Matricula: </label>
+                <input type="text" name="Matricula" id="Matricula"> <br>
+                    
+                <label for="Nombre">Nombre: </label>
+                <input type="text" name="Nombre" id="Nombre"> <br>
+                
+                <label for="ApPat">Apellido Paterno: </label>
+                <input type="text" name="ApPat" id="ApPat"> <br>
+                
+                <label for="ApMat">Apellido Materno: </label>
+                <input type="text" name="ApMat" id="ApMat"> <br>
+                
+                <label for="Carrera">Carrera: </label>
+                <input type="text" name="Carrera" id="Carrera"> <br>
+                
+                <label for="Semestre">Semestre: </label>
+                <input type="text" name="Semestre" id="Semestre"> <br>
+                
+                <label for="Email">E-mail: </label>
+                <input type="text" name="Email" id="Email" placeholder="cuenta@servicio.extensión"> <br>
+                    
+                <label for="Telegono">Telefono: </label>
+                <input type="text" name="Telefono" id="Telefono"> <br>
+                
+                        </div>
+                
+            <input type="button" name="guardar" id="guardar" value="Guardar">
+        </form>
+                    <div id="respuesta"> </div>
+                </div>
+                <div data-roler="footer">
+                    <a href="#Principal" data-role="button" data-transition="flip" data-add-back-btn="true" data-icon="home">Regresar</a>
+                    <p>Derechos reservados</p>
+                </div>
+            </div>
+    
+    <div data-role="page" id="Datos_Calificaciones" data-theme="b">
+        <div data-role="header">
+            <p style="text-align: center;">Registro de calificaciones</p>
+        </div>
+        <div data-role="content">
+            <form method="POST" action="envio_datos.php">
+                <div class="ui-field-contain">
+                    
+                    <label for="Matriculaa">Matricula: </label>
+                    <input type="text" name="Matriculaa" id="Matriculaa"> <br>
+                    
+                    <label for="Parcial1">Parcial 1:</label>
+                    <input type="text" name="Parcial1" id="Parcial1">
+                        
+                    <label for="Parcial2">Parcial 2:</label>
+                    <input type="text" name="Parcial2" id="Parcial2">
+                    
+                    <label for="Parcial3">Parcial 3:</label>
+                    <input type="text" name="Parcial3" id="Parcial3">
+                    
+                    <label for="Parcial4">Parcial 4:</label>
+                    <input type="text" name="Parcial4" id="Parcial4">
+                </div>
+                <input type="button" name="guardar_cal" id="guardar_cal" value="Guardar">
+            </form>
+            <div id="respuesta"> </div>
+        </div>
+        <div data-roler="footer">
+            <a href="#Principal" data-role="button" data-transition="flip" data-add-back-btn="true" data-icon="home">Regresar</a>
+            <p>Derechos reservados</p>
+        </div>
+    </div>
+</body>
+</html>
