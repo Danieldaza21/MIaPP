@@ -33,7 +33,7 @@
                     
       $.ajax({
           type:"POST",
-          url:"http://aguilardaza.260mb.net/datos",
+          url:"http://aguilardaza.260mb.net/datos.php",
           data:"Matricula="+Mat+"&Nombre="+Nom+"&Apellido_Paterno="+ApPat+"&Apellido_Materno="+ApMat+"&Carrera="+Car+"&Semestre="+Sem+"&Email="+Email+"&Telefono="+Tel,
           success:recepcion
       })
@@ -50,7 +50,7 @@
                 
                 $.ajax({
           type:"POST",
-          url:"http://aguilardaza.260mb.net/calificaciones",
+          url:"http://aguilardaza.260mb.net/calificaciones.php",
           data:"Matricula="+Matri+"&Parcial1="+pa1+"&Parcial2="+pa2+"&Parcial3="+pa3+"&Parcial4="+pa4+"&Promedio="+prome,
           success:recepcion1
       })
